@@ -5,11 +5,12 @@ services:
         build: .
         image: examenraquel
         container_name: examenraquel
+        links:
+            - mongodb
         ports: 
             - "7077:5000"
         volumes: 
             - ./src:/app
-
     mongodb:
         image: mongo:latest
         container_name: "mongodb"
@@ -21,4 +22,8 @@ services:
         ports:
             - 27017:27017
         command: mongod 
+
+
+
+
         
