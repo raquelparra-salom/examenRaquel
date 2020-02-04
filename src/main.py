@@ -3,12 +3,16 @@ from flask import request, redirect, url_for
 from flask import make_response
 from flask import render_template
 import os
+import pymongo
 
+myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+mydb = myclient["examen"]
+agenda = mydb["agenda"]
 app =  Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def login():
-    return render_template("index.html")
+    return render_template("login.html")
 
 @app.route('/gastos', methods=['POST'])
 def pagos():
@@ -21,24 +25,23 @@ def pagos():
     gastos = int(gasolina) + int(seguro) + int(itv) + int(aceite)
 
     diccionario = {
-        "enero": gastos,
-        "febrero": gastos,
-        "marzo": gastos,
-        "abril": gastos,
-        "mayo": gastos,
-        "junio": gastos,
-        "julio": gastos,
-        "agosto": gastos,
-        "septiembre": gastos,
-        "octubre": gastos,
-        "noviembre": gastos,
-        "diciembre": gastos,
-    }
+        "enero": int(gasolina), 
+        "febrero": int(gasolina) + int(seguro), 
+        "marzo": int(gasolina), 
+        "abril": int(gasolina) + int(aceite), 
+        "mayo": int(gasolina), 
+        "junio": int(gasolina) + int(itv), 
+        "julio": int(gasolina), 
+        "agosto": int(gasolina), 
+        "septiembre": int(gasolina), 
+        "octubre": int(gasolina), 
+        "noviembre": int(gasolina), 
+        "diciembre": int(gasolina),
+        }
+    agenda.insert_one(diccionario)
 
     print(gastos)
-    return render_template("play.html", diccionario=diccionario)
-
-   
+    return render_template("resultado.html", gastos=gastos)
 
 if __name__ == '__main__' :
     
