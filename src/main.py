@@ -5,7 +5,7 @@ from flask import render_template
 import os
 import pymongo
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient("mongodb://17c4af674166:27017/")
 mydb = myclient["examen"]
 agenda = mydb["agenda"]
 app =  Flask(__name__)
@@ -31,7 +31,7 @@ def pagos():
         "abril": int(gasolina) + int(aceite), 
         "mayo": int(gasolina), 
         "junio": int(gasolina) + int(itv), 
-        "julio": int(gasolina), 
+        "julio": int(gasolina),
         "agosto": int(gasolina), 
         "septiembre": int(gasolina), 
         "octubre": int(gasolina), 
@@ -41,7 +41,7 @@ def pagos():
     agenda.insert_one(diccionario)
 
     print(gastos)
-    return render_template("resultado.html", gastos=gastos)
+    return render_template("resultado.html", gastos=gastos, diccionario=diccionario)
 
 if __name__ == '__main__' :
     
