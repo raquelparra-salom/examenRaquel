@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+     {% block header %}
+     {% endblock %}
+
+{% block content %}     
+     <div class="container">
+          <form action="/gastos" method="post">
+               <label for="gasolina">Importe de gasolina: </label>
+               <input type="number"  name="gasolina" /><br>
+               <label for="seguro">Importe del seguro: </label>
+               <input type="number"  name="seguro" /><br>
+               <label for="itv">Importe de la ITV: </label>
+               <input type="number"  name="itv" /><br>
+               <label for="aceite">Importe del cambio de aceite: </label>
+               <input type="number"  name="aceite" /><br>
+               <input type="submit" name="dado" value="Calcular" />
+          </form>
+ 
+     </div>
+ {% endblock %}
+
+     {% block footer %}
+     {% endblock %}
